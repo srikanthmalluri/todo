@@ -35,18 +35,18 @@ app.get("/todos/:id", async(req,res)=>{
     res.json(getTodoById.rows);
 })
 
-    app.use(delById)
-// app.delete("/todos/:id",async(req,res)=>{
-//     try {
-//         const id = req.params.id;
-//         console.log(id);
+    // app.use(delById)    //for using seperate route file for each api
+app.delete("/todos/:id",async(req,res)=>{
+    try {
+        const id = req.params.id;
+        console.log(id);
 
-//         const delId= await pool.query("delete from todo where todo_id=($1)",[id])
-//         res.status(200).json(delId)
-//     } catch (error) {
-//         console.error(message)
-//     }
-// })
+        const delId= await pool.query("delete from todo where todo_id=($1)",[id])
+        res.status(200).json(delId)
+    } catch (error) {
+        console.error(message)
+    }
+})
 
 app.listen(3000,()=>{
     console.log("listening on 3000")
